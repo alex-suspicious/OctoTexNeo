@@ -1,0 +1,1 @@
+pyinstaller --icon=favicon.ico --noconfirm --noconsole --add-data "webui:webui/" --add-data "system:system/" --add-data "objects:objects/" --onefile "main.py"

@@ -1,5 +1,4 @@
 import os
-
 import asyncio
 import functions
 import plugins
@@ -22,14 +21,6 @@ import shutil
 import requests
 import base64
 
-
-default_material = """@opaque
-displace_in = 0.05
-transmittance_measurement_distance = 1
-reflection_roughness_constant = 1
-ior_constant = 0
-metallic_constant = 0
-emissive_intensity = 0"""
 
 webui_dir = "webui"
 if( hasattr(sys,"_MEIPASS") ):

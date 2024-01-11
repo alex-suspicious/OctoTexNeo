@@ -2,10 +2,15 @@ import os
 import sys
 import random
 import asyncio
-    
+
+MEIPASS = ""
+if( hasattr(sys,"_MEIPASS") ):
+    MEIPASS = sys._MEIPASS + "/"
+
 container = {}
 
 def findAny( dir = "" ):
+    dir = MEIPASS + dir
     files = []
     listdir = os.listdir( dir )
 
@@ -19,6 +24,7 @@ def findAny( dir = "" ):
     return files;
 
 def findDirectories( dir = "" ):
+    dir = MEIPASS + dir
     directories = []
 
     listdir = os.listdir( dir )
@@ -34,6 +40,7 @@ def findDirectories( dir = "" ):
     return directories;
 
 def findPyFiles( dir = "" ):
+    dir = MEIPASS + dir
     directories = findDirectories( dir )
     files = []
 
@@ -59,9 +66,8 @@ def load():
     savedSubdir = ""
     for x in range(0,len(files)):
         file = files[x]
-        path = file.replace("objects","").split("/")[1].replace(".py","")
+        path = file.replace("objects","").split("/")[-1].replace(".py","")
         
-
 
         code_file = open(file , "r", encoding="utf-8")
         code = code_file.read()
