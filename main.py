@@ -20,7 +20,7 @@ import zipfile
 import shutil
 import requests
 import base64
-
+sys.stdout.reconfigure(encoding='utf-8')
 
 webui_dir = "webui"
 if( hasattr(sys,"_MEIPASS") ):
@@ -76,6 +76,22 @@ for directory in neededDirectories:
 	if not isExist:
 		os.makedirs(directory)
 
+def preprocess(html):
+	lines = html.split("\n")
+
+	for x in range(len(lines)):
+		line = lines[x]
+		if( "@import" in line ):
+			file = line.split("@import ")[1]
+
+			f = open((webui_dir + "/" + file), "r", encoding="utf8")
+			content = f.read()
+			f.close()
+			
+			lines[x] = content
+
+
+	return "\n".join(lines)
 
 def callback_object(request):
 	className = request.match_info.get('class', "error")
@@ -174,6 +190,7 @@ async def all_routing( request, index = False ):
 	file = f.read()
 	f.close()
 
+	file = preprocess(file)
 
 	headers = {}
 	if( cache ):

@@ -22,10 +22,45 @@
     </div>
 
     <div class="right-sidebar">
-      <button class="btn" obj="test" def="hello" >Test callback</button>
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <button class="nav-link active" id="nav-stage-tab" data-bs-toggle="tab" data-bs-target="#nav-stage" type="button" role="tab" aria-controls="nav-stage" aria-selected="true">Stage</button>
+          <button class="nav-link" id="nav-layer-tab" data-bs-toggle="tab" data-bs-target="#nav-layer" type="button" role="tab" aria-controls="nav-layer" aria-selected="false">Layer</button>
+          <button class="nav-link" id="nav-settings-tab" data-bs-toggle="tab" data-bs-target="#nav-settings" type="button" role="tab" aria-controls="nav-settings" aria-selected="false">Settings</button>
+        </div>
+      </nav>
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-stage" role="tabpanel" aria-labelledby="nav-stage-tab">
+          @import parts/right_sidebar/Stage.html
+        </div>
+        <div class="tab-pane fade" id="nav-layer" role="tabpanel" aria-labelledby="nav-layer-tab">
+          @import parts/right_sidebar/Layer.html
+        </div>
+        <div class="tab-pane fade" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab">
+          @import parts/right_sidebar/Settings.html
+        </div>
+      </div>
     </div>
 
     <div class="bottom-bar">
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <button class="nav-link active" id="nav-content-tab" data-bs-toggle="tab" data-bs-target="#nav-content" type="button" role="tab" aria-controls="nav-content" aria-selected="true">Content</button>
+          <button class="nav-link" id="nav-materials-tab" data-bs-toggle="tab" data-bs-target="#nav-materials" type="button" role="tab" aria-controls="nav-materials" aria-selected="false">Materials</button>
+          <button class="nav-link" id="nav-plugins-tab" data-bs-toggle="tab" data-bs-target="#nav-plugins" type="button" role="tab" aria-controls="nav-plugins" aria-selected="false">Plugins</button>
+        </div>
+      </nav>
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-content" role="tabpanel" aria-labelledby="nav-content-tab">
+          @import parts/bottom/Content.html
+        </div>
+        <div class="tab-pane fade" id="nav-materials" role="tabpanel" aria-labelledby="nav-materials-tab">
+          @import parts/bottom/Materials.html
+        </div>
+        <div class="tab-pane fade" id="nav-plugins" role="tabpanel" aria-labelledby="nav-plugins-tab">
+          @import parts/bottom/Plugins.html
+        </div>
+      </div>
     </div>
 
     <div class="top-bar">

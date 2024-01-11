@@ -12,7 +12,7 @@ def load():
 
 	for x in range(len(plugins)):
 		temp = plugins[x]
-		f = open(f"plugins/{temp}/functions.py","r")
+		f = open(f"plugins/{temp}/functions.py","r", encoding="utf-8")
 		code = f.read()
 		f.close()
 
