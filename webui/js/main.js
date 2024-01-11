@@ -1,4 +1,8 @@
-var notif_sound = new Audio('notif_sound.mp3');
+var all_sounds = {
+	"success": new Audio('success.mp3'),
+	"error": new Audio('error.mp3'),
+	"info": new Audio('info.mp3')
+};
 
 function lerp (start, end, amt){
   return (1-amt)*start+amt*end
@@ -93,7 +97,7 @@ $(document).ready( function () {
 				}
 
 				toastr[data[0]]( data[1] );
-				notif_sound.play();
+				all_sounds[data[0]].play();
 			});
 		}
 	});
