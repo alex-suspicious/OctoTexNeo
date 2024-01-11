@@ -5,6 +5,7 @@
 
 *{
 	color: white;
+	font-size: 15px;
 }
 
 body{
@@ -73,10 +74,11 @@ body{
 }
 
 .toast{
-	width: 195px !important;
+	width: 240px !important;
 	height: 40px;
+	white-space: nowrap;
 	line-height: 10px !important;
-	font-size: 13px;
+	font-size: 13px !important;
 	box-shadow: none !important;
 	margin-bottom: 1px !important;
 	transform: translateY(-210px) translateX(-311px);
