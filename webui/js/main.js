@@ -1,3 +1,4 @@
+var notif_sound = new Audio('notif_sound.mp3');
 
 function lerp (start, end, amt){
   return (1-amt)*start+amt*end
@@ -82,7 +83,7 @@ $(document).ready( function () {
 					"positionClass": "toast-bottom-right",
 					"preventDuplicates": false,
 					"showDuration": "300",
-					"hideDuration": "8000",
+					"hideDuration": "0",
 					"timeOut": "8000",
 					"extendedTimeOut": "8000",
 					"showEasing": "swing",
@@ -92,7 +93,7 @@ $(document).ready( function () {
 				}
 
 				toastr[data[0]]( data[1] );
-
+				notif_sound.play();
 			});
 		}
 	});

@@ -47,7 +47,8 @@ req_types = {
 	"jpeg":"image/*",
 	"ttf":"application/octet-stream",
 	"ico":"image/x-icon",
-	"hdr":"image/vnd.radiance"
+	"hdr":"image/vnd.radiance",
+	"mp3": "audio/*"
 }
 
 cache_types = {
@@ -61,7 +62,8 @@ cache_types = {
 	"jpeg":False,
 	"ttf":True,
 	"ico":True,
-	"hdr":True
+	"hdr":False,
+	"mp3":False
 }
 
 neededDirectories = ["plugins"]
@@ -160,7 +162,7 @@ async def all_routing( request, index = False ):
 
 	cache = cache_types[ fileType[len(fileType)-1].split("?")[0] ]
 
-	if( "image" in reqType or "octet" in reqType or "woff2" in reqType ):
+	if( "image" in reqType or "octet" in reqType or "woff2" in reqType or "audio" in reqType ):
 		try:
 			f = open( (webui_dir + "/" + requestNew), "rb")
 			file = f.read()
