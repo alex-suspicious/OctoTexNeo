@@ -93,6 +93,12 @@ def preprocess(html):
 			
 			lines[x] = content
 
+		if( "@download" in line ):
+			url = line.split("@download ")[1]
+
+			x = requests.get(url)
+			lines[x] = x.text
+
 
 	return "\n".join(lines)
 
