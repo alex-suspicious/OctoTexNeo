@@ -20,11 +20,14 @@ import zipfile
 import shutil
 import requests
 import base64
+import logger
 sys.stdout.reconfigure(encoding='utf-8')
 
 webui_dir = "webui"
 if( hasattr(sys,"_MEIPASS") ):
 	webui_dir = sys._MEIPASS + "/webui"
+
+
 
 req_types = {
 	"html":"text/html",
@@ -97,8 +100,8 @@ def callback_object(request):
 	className = request.match_info.get('class', "error")
 	classFunction = request.match_info.get('function', "error")
 
-	print(className)
-	print(classFunction)
+	#print(className)
+	#print(classFunction)
 
 	obj_done = functions.container[className]
 	func_done = getattr(obj_done, classFunction)
@@ -214,6 +217,7 @@ async def plugins_routing( request ):
 
 def aiohttp_server():
 	#plugins.load()
+	logger.log.start()
 	print("Welcome to OctoTex Neo!")
 	functions.load()
 
@@ -251,4 +255,4 @@ def on_closed():
 window = webview.create_window('OctoTex Neo', 'http://localhost:27576', width=1280, height=720)
 window.events.closed += on_closed
 t.start()
-webview.start()
+webview.start(gui='edgechromium')

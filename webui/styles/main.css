@@ -124,3 +124,36 @@ body{
 .tab-pane{
 	padding: 15px;	
 }
+
+.renderer{
+	background-color: transparent;
+	top: 35px;
+	left: 0;
+	width: calc(100vw - 320px);
+	height: calc(100vh - (220px + 35px));
+	position: absolute;
+}
+
+.fps-counter *{
+	position: absolute;
+	top: 45px;
+	left: 10px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+		border-right: 1px solid rgba(255, 255, 255, 0.3);
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    border-right: 10px solid rgba(255, 255, 255, 0.5);
+}
+
+::-webkit-scrollbar-thumb:active {
+    border-right: 10px solid rgba(255, 255, 255, 0.8);
+}

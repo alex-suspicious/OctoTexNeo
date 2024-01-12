@@ -14,7 +14,14 @@
     <link rel="stylesheet" href="/styles/toastr.css">
     <script src="/js/toastr.min.js"></script>
     <link href="/styles/main.css" rel="stylesheet" >
-    
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three/examples/jsm/"
+        }
+      }
+    </script>
     <script type="module" src="/js/main.js"></script>
   </head>
   <body>
@@ -27,6 +34,7 @@
           <button class="nav-link active" id="nav-stage-tab" data-bs-toggle="tab" data-bs-target="#nav-stage" type="button" role="tab" aria-controls="nav-stage" aria-selected="true">Stage</button>
           <button class="nav-link" id="nav-layer-tab" data-bs-toggle="tab" data-bs-target="#nav-layer" type="button" role="tab" aria-controls="nav-layer" aria-selected="false">Layer</button>
           <button class="nav-link" id="nav-settings-tab" data-bs-toggle="tab" data-bs-target="#nav-settings" type="button" role="tab" aria-controls="nav-settings" aria-selected="false">Settings</button>
+          <button class="nav-link" id="nav-patrons-tab" data-bs-toggle="tab" data-bs-target="#nav-patrons" type="button" role="tab" aria-controls="nav-patrons" aria-selected="false">Patrons</button>
         </div>
       </nav>
       <div class="tab-content" id="nav-tabContent">
@@ -39,6 +47,9 @@
         <div class="tab-pane fade" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab">
           @import parts/right_sidebar/Settings.html
         </div>
+        <div class="tab-pane fade" id="nav-patrons" role="tabpanel" aria-labelledby="nav-patrons-tab">
+          @import parts/right_sidebar/Settings.html
+        </div>
       </div>
     </div>
 
@@ -49,6 +60,7 @@
           <button class="nav-link" id="nav-materials-tab" data-bs-toggle="tab" data-bs-target="#nav-materials" type="button" role="tab" aria-controls="nav-materials" aria-selected="false">Materials</button>
           <button class="nav-link" id="nav-plugins-tab" data-bs-toggle="tab" data-bs-target="#nav-plugins" type="button" role="tab" aria-controls="nav-plugins" aria-selected="false">Plugins</button>
           <button class="nav-link" id="nav-automatization-tab" data-bs-toggle="tab" data-bs-target="#nav-automatization" type="button" role="tab" aria-controls="nav-automatization" aria-selected="false">Automatization</button>
+          <button class="nav-link" id="nav-console-tab" data-bs-toggle="tab" data-bs-target="#nav-console" type="button" role="tab" aria-controls="nav-console" aria-selected="false">Console</button>
         </div>
       </nav>
       <div class="tab-content" id="nav-tabContent">
@@ -64,10 +76,17 @@
         <div class="tab-pane fade" id="nav-automatization" role="tabpanel" aria-labelledby="nav-automatization-tab">
           @import parts/bottom/Automatization.html
         </div>
+        <div class="tab-pane fade" id="nav-console" role="tabpanel" aria-labelledby="nav-console-tab">
+          @import parts/bottom/Console.html
+        </div>
       </div>
     </div>
 
     <div class="top-bar">
+    </div>
+
+    <div class="renderer" >
+      @import parts/renderer.html
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>

@@ -62,6 +62,8 @@ def load():
     files = findAny("objects")
     print("\nLoading Objects...")
     globalsz = globals()
+    
+    print( "┌──────────────────────────────────")
 
     savedSubdir = ""
     for x in range(0,len(files)):
@@ -78,7 +80,6 @@ def load():
         #    savedSubdir = subdir
             #print( f"┌────────  {subdir}")
 
-        print( "┌──────────────────────────────────")
         print( "│ +        " + path )
 
 
