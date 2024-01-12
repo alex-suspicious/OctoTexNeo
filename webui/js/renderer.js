@@ -31,11 +31,11 @@ function init() {
 	clock = new THREE.Clock();
 
 	scene = new THREE.Scene();
-	scene.background = new THREE.Color( 0xaaccff );
-	scene.fog = new THREE.FogExp2( 0xaaccff, 0.0007 );
+	scene.background = new THREE.Color( 0x141414 );
+	//scene.fog = new THREE.FogExp2( 0xAAAAAA, 0.0007 );
 
-	const grid = new THREE.GridHelper( 200, 40, 0x000000, 0x000000 );
-	grid.material.opacity = 0.2;
+	const grid = new THREE.GridHelper( 200, 40, 0xAAAAAA, 0xAAAAAA );
+	grid.material.opacity = 0.5;
 	grid.material.transparent = true;
 	scene.add( grid );
 
