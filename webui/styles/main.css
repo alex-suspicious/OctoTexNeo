@@ -174,6 +174,7 @@ body{
   height: 100%;
   overflow-y: scroll;
   padding: 10px;
+  margin: 0px !important;
   background-color: var(--main-bg-color);
 }
 
@@ -193,6 +194,7 @@ body{
 	margin-left: -1px !important;
 	margin-right: -1px !important;
 	line-height: 8px;
+	height: 26px;
 	transition: all 0.3s;
 }
 
