@@ -1,8 +1,7 @@
 import * as THREE from 'three';
 
 import Stats from 'three/addons/libs/stats.module.js';
-
-import { FirstPersonControls } from 'three/addons/controls/FirstPersonControls.js';
+import { PointerLockControls } from 'three/addons/controls/PointerLockControls.js';
 
 let camera, controls, scene, renderer, stats;
 
@@ -10,13 +9,24 @@ let mesh, geometry, material, clock;
 
 const worldWidth = 128, worldDepth = 128;
 
+let moveForward = false;
+let moveBackward = false;
+let moveLeft = false;
+let moveRight = false;
+let canJump = false;
+
+let prevTime = performance.now();
+const velocity = new THREE.Vector3();
+const direction = new THREE.Vector3();
+const vertex = new THREE.Vector3();
+
 init();
 animate();
 
 function init() {
 
 	camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 20000 );
-	camera.position.y = 200;
+	camera.position.y = 0;
 
 	clock = new THREE.Clock();
 
@@ -24,38 +34,90 @@ function init() {
 	scene.background = new THREE.Color( 0xaaccff );
 	scene.fog = new THREE.FogExp2( 0xaaccff, 0.0007 );
 
-	geometry = new THREE.PlaneGeometry( 20000, 20000, worldWidth - 1, worldDepth - 1 );
-	geometry.rotateX( - Math.PI / 2 );
+	const grid = new THREE.GridHelper( 200, 40, 0x000000, 0x000000 );
+	grid.material.opacity = 0.2;
+	grid.material.transparent = true;
+	scene.add( grid );
 
-	const position = geometry.attributes.position;
-	position.usage = THREE.DynamicDrawUsage;
-
-	for ( let i = 0; i < position.count; i ++ ) {
-
-		const y = 35 * Math.sin( i / 2 );
-		position.setY( i, y );
-
-	}
-
-	const texture = new THREE.TextureLoader().load( 'textures/water.jpg' );
-	texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-	texture.repeat.set( 5, 5 );
-	texture.colorSpace = THREE.SRGBColorSpace;
-
-	material = new THREE.MeshBasicMaterial( { color: 0x0044ff, map: texture } );
-
-	mesh = new THREE.Mesh( geometry, material );
-	scene.add( mesh );
 
 	renderer = new THREE.WebGLRenderer( { antialias: true } );
 	renderer.setPixelRatio( window.devicePixelRatio );
 	renderer.setSize( $(".renderer").width(), $(".renderer").height() );
 	$(".renderer").append( renderer.domElement );
 
-	controls = new FirstPersonControls( camera, renderer.domElement );
+	controls = new PointerLockControls( camera, renderer.domElement );
 
-	controls.movementSpeed = 500;
-	controls.lookSpeed = 0.1;
+
+
+	controls.addEventListener( 'lock', function () {
+
+	} );
+
+	controls.addEventListener( 'unlock', function () {
+
+	} );
+
+	scene.add( controls.getObject() );
+
+
+	const onKeyDown = function ( event ) {
+
+		switch ( event.code ) {
+
+			case 'ArrowUp':
+			case 'KeyW':
+				moveForward = true;
+				break;
+
+			case 'ArrowLeft':
+			case 'KeyA':
+				moveLeft = true;
+				break;
+
+			case 'ArrowDown':
+			case 'KeyS':
+				moveBackward = true;
+				break;
+
+			case 'ArrowRight':
+			case 'KeyD':
+				moveRight = true;
+				break;
+		}
+
+	};
+
+	const onKeyUp = function ( event ) {
+
+		switch ( event.code ) {
+
+			case 'ArrowUp':
+			case 'KeyW':
+				moveForward = false;
+				break;
+
+			case 'ArrowLeft':
+			case 'KeyA':
+				moveLeft = false;
+				break;
+
+			case 'ArrowDown':
+			case 'KeyS':
+				moveBackward = false;
+				break;
+
+			case 'ArrowRight':
+			case 'KeyD':
+				moveRight = false;
+				break;
+
+		}
+
+	};
+
+
+	document.addEventListener( 'keydown', onKeyDown );
+	document.addEventListener( 'keyup', onKeyUp );
 
 	stats = new Stats();
 	$(".fps-counter").append( stats.dom );
@@ -77,12 +139,73 @@ function onWindowResize() {
 
 }
 
-//
+$(".renderer").bind("contextmenu",function(e){
+   return false;
+}); 
+
+$(".renderer").mousedown(function(event) {
+    switch (event.which) {
+        case 1:
+           	//alert('Left Mouse button pressed.');
+            break;
+        case 2:
+            //alert('Middle Mouse button pressed.');
+            break;
+        case 3:
+            controls.lock();
+            break;
+        default:
+            break;
+    }
+});
+
+
+$(".renderer").mouseup(function(event) {
+    switch (event.which) {
+        case 1:
+           	//alert('Left Mouse button pressed.');
+            break;
+        case 2:
+            //alert('Middle Mouse button pressed.');
+            break;
+        case 3:
+            controls.unlock();
+            break;
+        default:
+            break;
+    }
+});
 
 function animate() {
-
+	const time = performance.now();
 	requestAnimationFrame( animate );
 
+	const delta = ( time - prevTime ) / 1000;
+	//const cameraDir = controls.getDirection();
+
+	velocity.x = 0;
+	velocity.z = 0;
+	velocity.y = 0;
+
+	direction.z = Number( moveForward ) - Number( moveBackward );
+	direction.x = Number( moveRight ) - Number( moveLeft );
+	direction.normalize(); // this ensures consistent movements in all directions
+
+	if ( moveForward || moveBackward ) velocity.z -= direction.z * 20500.0 * delta;
+	if ( moveLeft || moveRight ) velocity.x -= direction.x * 20500.0 * delta;
+
+	controls.moveRight( - velocity.x * delta );
+
+	var mouse3D = new THREE.Vector3();
+	mouse3D.normalize();
+	controls.getDirection( mouse3D );
+
+
+	controls.getObject().position.x = controls.getObject().position.x + (mouse3D.x*direction.z);
+	controls.getObject().position.y = controls.getObject().position.y + (mouse3D.y*direction.z);
+	controls.getObject().position.z = controls.getObject().position.z + (mouse3D.z*direction.z);
+
+	prevTime = time;
 	render();
 	stats.update();
 
@@ -93,18 +216,8 @@ function render() {
 	const delta = clock.getDelta();
 	const time = clock.getElapsedTime() * 10;
 
-	const position = geometry.attributes.position;
 
-	for ( let i = 0; i < position.count; i ++ ) {
-
-		const y = 35 * Math.sin( i / 5 + ( time + i ) / 7 );
-		position.setY( i, y );
-
-	}
-
-	position.needsUpdate = true;
-
-	controls.update( delta );
+	//controls.update( delta );
 	renderer.render( scene, camera );
 
 }
