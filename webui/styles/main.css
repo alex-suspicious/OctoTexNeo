@@ -1,6 +1,7 @@
 :root {
   --main-bg-color: rgb(20,20,20);
-  --sidebars-color: rgb(40,40,40);
+  --sidebars-color: rgb(30,30,30);
+  --lighter: rgb(40,40,40);
 }
 
 *{
@@ -17,16 +18,33 @@ body{
 	width: 40px;
 	height: 100vh;
 	position: absolute;
+	z-index: -1;
+}
+
+.renderer-container{
+	z-index: -10;
 }
 
 .right-sidebar{
 	background-color: var(--sidebars-color);
 	width: 320px;
-	height: calc(50vh - 34px);
+	height: calc(50vh - 26px);
 	right: 0;
-	top: 34px;
+	top: 26px;
 	position: absolute;
 	border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.project-tab{
+	background-color: var(--sidebars-color);
+	top: 0;
+	left: 0;
+	padding: 15px;
+	width: calc(100vw - 320px);
+	height: calc(100vh - (220px + 26px));
+	position: absolute;
+	overflow-y: scroll;
+	box-shadow: inset 0px 10px 10px rgba(0, 0, 0, 0.1), inset 0px -10px 10px rgba(0, 0, 0, 0.1);
 }
 
 .right-sidebar-bottom{
@@ -51,7 +69,7 @@ body{
 .top-bar{
 	background-color: var(--sidebars-color);
 	width: 100vw;
-	height: 35px;
+	height: 26px;
 	top: 0;
 	position: absolute;
 	z-index: -1;
@@ -59,6 +77,7 @@ body{
 }
 
 .btn{
+	margin-bottom: 15px;
 	color: white;
 	border: solid 1px rgba(255, 255, 255, 0.8);
 	background-color: rgba(255, 255, 255, 0);
@@ -83,19 +102,71 @@ body{
 	box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.3);
 }
 
+.input{
+	margin-bottom: 15px;
+	color: white;
+	border: solid 1px rgba(255, 255, 255, 0.8);
+	background-color: rgba(255, 255, 255, 0);
+	border-radius: 0px;
+	line-height: 17px;
+	height: 27px;
+	transition: all 0.3s;
+	box-shadow: 0px 0px 30px rgba(255, 255, 255, 0);
+}
+
+.input:hover{
+	color: white;
+	border: solid 1px rgba(255, 255, 255, 0.8);
+	background-color: rgba(255, 255, 255, 0.3);
+	box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.06);
+}
+
+.input:active{
+	transition: all 0s;
+	color: white !important;
+	border: solid 1px rgba(255, 255, 255, 1.0) !important;
+	background-color: rgba(255, 255, 255, 0.6) !important;
+	box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.3);
+}
+
+.input:focus{
+	outline: none !important;
+}
+
+.toast-bottom-right{
+	width: 50px !important;
+	overflow: visible !important;
+	transform: translateY(-210px) translateX(-311px);
+	text-align: right !important;
+}
+
 .toast{
-	width: 240px !important;
+	min-width: 0px !important;
+	max-width: 500px !important;
+	width: fit-content !important;
+	right: 0 !important;
+	float:right !important;
 	height: 40px;
 	white-space: nowrap;
 	line-height: 10px !important;
 	font-size: 13px !important;
 	box-shadow: none !important;
 	margin-bottom: 1px !important;
-	transform: translateY(-210px) translateX(-311px);
+	border-radius: 0px !important;
+	opacity: 1 !important;
+	position: relative !important;
 }
 
 .toast-success{
-	background-color: rgba(30, 150, 30, 1.0);
+	background-color: rgba(30, 160, 50, 0.8) !important;
+}
+
+.toast-info{
+	background-color: rgba(30, 100, 160, 0.8) !important;
+}
+
+.toast-error{
+	background-color: rgba(160, 50, 30, 0.8) !important;
 }
 	
 .scroll-output{
@@ -143,11 +214,11 @@ body{
 }
 
 .renderer{
-	background-color: transparent;
-	top: 35px;
+	background-color: transparent !important;
+	top: 26px;
 	left: 0;
 	width: calc(100vw - 320px);
-	height: calc(100vh - (220px + 35px));
+	height: calc(100vh - (220px + 26px));
 	position: absolute;
 }
 
@@ -173,4 +244,16 @@ body{
 
 ::-webkit-scrollbar-thumb:active {
     border-right: 10px solid rgba(255, 255, 255, 0.8);
+}
+
+.create-project-button{
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	width: 300px;
+	height: 300px;
+	margin-top: calc(50% - 150px);
+	background-color: var(--lighter);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
 }

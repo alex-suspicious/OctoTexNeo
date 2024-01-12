@@ -45,18 +45,30 @@ $(document).ready( function () {
 
 			//$(this).html( `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ` + newText + "..." );
 			var parent = $(this);
-
-			//changeWordsLoading(parent)
-			
+			var jquery_vars = $(this).attr("vars");
+			var default_attributes = this.attributes;
 			var args = [];
+			//changeWordsLoading(parent)
+			if( jquery_vars ){
+				jquery_vars = jquery_vars.split(",");
+				for (var i = 0; i < jquery_vars.length; i++) {
+					var val = $(jquery_vars[i]).val();
+					//console.log(jquery_vars[i] + " = " + val);
+					//default_attributes[jquery_vars[i].replace("#","").replace(".","")] = val;
+					args.push( jquery_vars[i].replace("#","").replace(".","") + "=" + val );
+				}
+			}
+
+			
 			//if( parent.hasClass("need-texture") )
 			//	args.push( "texture=" + parent.attr("texture-name") )
-			var blackList = ["disabled", "class", "obj", "callback", "def", "prev-html", "role", "value", "id", "aria-labelledby", "style", "src", "href"];
-			$.each(this.attributes, function() {
+			var blackList = ["disabled", "class", "obj", "callback", "vars", "def", "prev-html", "role", "value", "id", "aria-labelledby", "style", "src", "href"];
+			$.each(default_attributes, function() {
 				if(this.specified && !blackList.includes(this.name) ) {
-					args.push( this.name + "=" + this.value )
+					args.push( this.name + "=" + this.value );
 				}
 			});
+
 
 			if(  args.length > 0 )
 				args = "?" + args.join('&')

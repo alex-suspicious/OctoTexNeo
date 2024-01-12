@@ -21,6 +21,7 @@ import shutil
 import requests
 import base64
 import logger
+import traceback
 sys.stdout.reconfigure(encoding='utf-8')
 
 webui_dir = "webui"
@@ -109,8 +110,13 @@ def callback_object(request):
 	#print(className)
 	#print(classFunction)
 
-	obj_done = functions.container[className]
-	func_done = getattr(obj_done, classFunction)
+	try:
+		obj_done = functions.container[className]
+		func_done = getattr(obj_done, classFunction)
+	except Exception as e:
+		print( traceback.format_exc() )
+		return web.Response(text=json.dumps(["error",str(e)]))
+
 
 	params = request.rel_url.query
 	normal_params = {}
@@ -119,6 +125,7 @@ def callback_object(request):
 		normal_params[k] = params.getall(k)
 	
 	#param_keys = list( normal_params.keys() ) 
+	
 
 	try:
 		func_params = inspect.signature(func_done);
@@ -127,7 +134,9 @@ def callback_object(request):
 		for x in range( len(func_param_names) ):
 			like_parameters.append( f"normal_params[ \"{func_param_names[x]}\" ][0]" )
 	except Exception as e:
-		print("Warning, parameters parsing failure.")
+		print( traceback.format_exc() )
+		return web.Response(text=json.dumps(["error",str(e)]))
+
 
 	code = """
 try:
@@ -138,9 +147,14 @@ except Exception as e:
 	#print(code)
 	env = globals()
 	envl = locals()
-	
-	exec(code, env, envl)
-	result = envl['result']
+
+	try:
+		exec(code, env, envl)
+		result = envl['result']
+	except Exception as e:
+		print( traceback.format_exc() )
+		return web.Response(text=json.dumps(["error",str(e)]))
+
 	#print( result )
 	#print(f"\n\n\n\n{result}\n\n\n\n\n")
 	#if( "texture" in params ):

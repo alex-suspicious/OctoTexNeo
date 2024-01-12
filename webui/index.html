@@ -49,7 +49,7 @@
         </div>
         <div class="tab-pane fade" id="nav-patrons" role="tabpanel" aria-labelledby="nav-patrons-tab">
           <div class="scroll-output" >
-            @download http://raw.githubusercontent.com/alex-suspicious/OctoTexNeo/main/system/patrons
+            Entity#7676
           </div>
         </div>
       </div>
@@ -60,14 +60,18 @@
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
           <button class="nav-link active" id="nav-property-tab" data-bs-toggle="tab" data-bs-target="#nav-property" type="button" role="tab" aria-controls="nav-property" aria-selected="true">Property</button>
           <button class="nav-link" id="nav-rendering-tab" data-bs-toggle="tab" data-bs-target="#nav-rendering" type="button" role="tab" aria-controls="nav-rendering" aria-selected="true">Rendering</button>
+          <button class="nav-link" id="nav-debug-tab" data-bs-toggle="tab" data-bs-target="#nav-debug" type="button" role="tab" aria-controls="nav-debug" aria-selected="true">Debug</button>
         </div>
       </nav>
       <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-property" role="tabpanel" aria-labelledby="nav-property-tab">
           @import parts/right_sidebar_bottom/Property.html
         </div>
-        <div class="tab-pane fade show active" id="nav-rendering" role="tabpanel" aria-labelledby="nav-rendering-tab">
+        <div class="tab-pane fade" id="nav-rendering" role="tabpanel" aria-labelledby="nav-rendering-tab">
           @import parts/right_sidebar_bottom/Rendering.html
+        </div>
+        <div class="tab-pane fade" id="nav-debug" role="tabpanel" aria-labelledby="nav-debug-tab">
+          @import parts/right_sidebar_bottom/Debug.html
         </div>
       </div>
     </div>
@@ -103,10 +107,27 @@
 
 
     <div class="top-bar">
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <button class="nav-link active" id="nav-project-tab" data-bs-toggle="tab" data-bs-target="#nav-project" type="button" role="tab" aria-controls="nav-project" aria-selected="true">Project</button>
+          <button class="nav-link" id="nav-preview-tab" data-bs-toggle="tab" data-bs-target="#nav-preview" type="button" role="tab" aria-controls="nav-preview" aria-selected="false">Preview</button>
+          <button class="nav-link" id="nav-about-tab" data-bs-toggle="tab" data-bs-target="#nav-about" type="button" role="tab" aria-controls="nav-about" aria-selected="false">Help</button>
+        </div>
+      </nav>
     </div>
 
     <div class="renderer" >
-      @import parts/renderer.html
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-project" role="tabpanel" aria-labelledby="nav-project-tab">
+          @import parts/project.html
+        </div>
+        <div class="tab-pane fade" id="nav-preview" role="tabpanel" style="padding: 0px !important;" aria-labelledby="nav-preview-tab">
+          @import parts/renderer.html
+        </div>
+        <div class="tab-pane fade" id="nav-about" role="tabpanel" style="padding: 0px !important;" aria-labelledby="nav-about-tab">
+          @import parts/about.html
+        </div>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>

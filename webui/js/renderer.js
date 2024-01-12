@@ -43,7 +43,7 @@ function init() {
 	renderer = new THREE.WebGLRenderer( { antialias: true } );
 	renderer.setPixelRatio( window.devicePixelRatio );
 	renderer.setSize( $(".renderer").width(), $(".renderer").height() );
-	$(".renderer").append( renderer.domElement );
+	$(".renderer-container").append( renderer.domElement );
 
 	controls = new PointerLockControls( camera, renderer.domElement );
 
@@ -139,11 +139,11 @@ function onWindowResize() {
 
 }
 
-$(".renderer").bind("contextmenu",function(e){
+$(".renderer-container").bind("contextmenu",function(e){
    return false;
 }); 
 
-$(".renderer").mousedown(function(event) {
+$(".renderer-container").mousedown(function(event) {
     switch (event.which) {
         case 1:
            	//alert('Left Mouse button pressed.');
@@ -160,7 +160,7 @@ $(".renderer").mousedown(function(event) {
 });
 
 
-$(".renderer").mouseup(function(event) {
+$(".renderer-container").mouseup(function(event) {
     switch (event.which) {
         case 1:
            	//alert('Left Mouse button pressed.');
