@@ -7,6 +7,7 @@
 *{
 	color: white;
 	font-size: 15px;
+	scrollbar-width: none !important;
 }
 
 body{
@@ -47,6 +48,18 @@ body{
 	box-shadow: inset 0px 10px 10px rgba(0, 0, 0, 0.1), inset 0px -10px 10px rgba(0, 0, 0, 0.1);
 }
 
+.project-window{
+	background-color: var(--sidebars-color);
+	top: 0;
+	left: 0;
+	padding: 15px;
+	width: 100vw;
+	height: 100vh;
+	position: absolute;
+	overflow-y: scroll;
+	box-shadow: inset 0px 10px 10px rgba(0, 0, 0, 0.1), inset 0px -10px 10px rgba(0, 0, 0, 0.1);
+}
+
 .right-sidebar-bottom{
 	background-color: var(--sidebars-color);
 	width: 320px;
@@ -55,6 +68,16 @@ body{
 	bottom: 0;
 	position: absolute;
 	border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.right-sidebar-bottom > .tab-content{
+	height: calc(50vh - 26px);
+	overflow: scroll !important;
+}
+
+.right-sidebar > .tab-content{
+	height: calc(50vh - 26px - 26px);
+	overflow: scroll !important;
 }
 
 .bottom-bar{
@@ -231,12 +254,13 @@ body{
 }
 
 ::-webkit-scrollbar {
-    width: 10px;  /* Remove scrollbar space */
+    width: 0px;  /* Remove scrollbar space */
     background: transparent;  /* Optional: just make scrollbar invisible */
+    border: none;
 }
 /* Optional: show position indicator in red */
 ::-webkit-scrollbar-thumb {
-		border-right: 1px solid rgba(255, 255, 255, 0.3);
+	border-right: 1px solid rgba(255, 255, 255, 0.3);
     background: transparent;
 }
 
@@ -254,8 +278,79 @@ body{
 	text-align: center;
 	width: 300px;
 	height: 300px;
-	margin-top: calc(50% - 150px);
+	display: block !important;
+	margin-top: calc(50vh - 150px);
 	background-color: var(--lighter);
 	border: 1px solid rgba(255, 255, 255, 0.2);
-	box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+	transition: 0.3s;
+}
+
+.create-project-button:hover{
+	transform: scale(1.05) perspective(200px);
+	box-shadow: 0px 20px 70px rgba(0, 0, 0, 0.1);
+	cursor: pointer;
+}
+
+.create-project-button > .fa-solid{
+	transition: all 0.3s;
+}
+
+.create-project-button:hover > .fa-solid{
+	transform: scale(1.1);
+}
+
+.create-project-button:active > .fa-solid{
+	transition: 0s;
+	transform: scale(0.95);
+}
+
+
+.create-project-button:active{
+	transition: 0s;
+	transform: scale(0.95) perspective(200px);
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6);
+	cursor: pointer;
+}
+
+.loading-anim{
+	top: 25px;
+	position: absolute;
+	width: 100vw;
+	height: 2px;
+	z-index: 100;
+	overflow: hidden;
+	transition: all 0.3s !important;
+}
+
+.loading-line{
+	opacity: 1;
+	height: 2px;
+	animation-name: loading;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+	background-color: rgba(10, 100, 20, 0.0);
+	transition: all 0.3s !important;
+}
+
+.loading-page * .loading-line {
+	background-color: rgba(30, 200, 50, 1.0);
+}
+
+.loading-page * .loading-anim {
+	width: 100vw !important;
+}
+
+.loading-page *{
+	transition: 0.6s all !important;
+	pointer-events: none !important;
+	opacity: 0.75;
+}
+
+@keyframes loading {
+  0%   {opacity: 0; width: 0%;}
+  20%  {opacity: 1;}
+  80%  {opacity: 1; width: 100%;}
+  99%  {opacity: 0; width: 100%;}
+  100% {opacity: 0; width: 0%;}
 }

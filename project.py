@@ -1,0 +1,3 @@
+directory = ""
+name = ""
+window = None

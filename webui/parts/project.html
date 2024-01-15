@@ -1,15 +1,24 @@
 <div class="project-tab" style="padding: 0px !important; margin: 0px !important; overflow: hidden !important;" >
 	<div class="row" style="min-height: calc(100vh - 245px); padding: 0px !important;" >
-		<div class="col-sm-2" style="border-right: 1px solid rgba(255, 255, 255, 0.3);" >
-			<h4 style="opacity: 0.9; margin: 15px;">Recent projects</h4>
+		<div class="col-sm-3" style="border-right: 1px solid rgba(255, 255, 255, 0.2);" >
+			<h4 style="opacity: 0.9; margin: 15px;">Project information</h4>
 			<hr style="margin-left: 10px;">
-			<div class="scroll-output" style="margin: 10px !important; width: calc(100% - 10px) !important; height: calc(100% - 85px) !important;" >...</div>
-		</div>
-		<div class="col" >
-			<div class="create-project-button">Create new project</div>
+
+			<div style="padding: 15px;" >
+				<label>Project name</label><br>
+				<input class="input" id="project_name" ></input><br>
+				<button class="btn" obj="project" def="save" vars="#project_name" >Save</button><br>
+			</div>
+
+			<h4 style="opacity: 0.9; margin: 15px;">Captures</h4>
+			<hr style="margin-left: 10px;">
+
+			<div style="padding: 15px;" >
+				<button class="btn" obj="captures" def="load" >Load</button>
+				<button class="btn" obj="captures" def="load" >Write</button><br>
+			</div>
 		</div>
 		<div class="col">
-			<div class="create-project-button">Load the game</div>
 		</div>
 	</div>
 </div>

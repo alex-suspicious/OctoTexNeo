@@ -1,3 +1,4 @@
+import time
 
 class test:
 	def success(self):
@@ -7,6 +8,12 @@ class test:
 	def info(self):
 		print("Info function was called!")
 		return ["info","Info callback!"]
+
+	def sleep(self):
+		global time
+		print("Waiting...")
+		time.sleep(10)
+		return ["info","Sleep is working!"]
 
 	def error(self):
 		print("Error function was called!")

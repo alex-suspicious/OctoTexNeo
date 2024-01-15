@@ -22,6 +22,7 @@ import requests
 import base64
 import logger
 import traceback
+import project
 sys.stdout.reconfigure(encoding='utf-8')
 
 webui_dir = "webui"
@@ -61,7 +62,7 @@ cache_types = {
 	"mp3":False
 }
 
-neededDirectories = ["plugins"]
+neededDirectories = ["plugins,system"]
 
 class StoppableThread(threading.Thread):
 	def __init__(self,  *args, **kwargs):
@@ -272,7 +273,7 @@ def on_closed():
 	t.stop()
 
 # Open website
-window = webview.create_window('OctoTex Neo', 'http://localhost:27576', width=1280, height=720)
-window.events.closed += on_closed
+project.window = webview.create_window('OctoTex Neo', 'http://localhost:27576/project', width=1280, height=720)
+project.window.events.closed += on_closed
 t.start()
 webview.start(gui='edgechromium')

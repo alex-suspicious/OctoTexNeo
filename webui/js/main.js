@@ -37,6 +37,7 @@ $(document).ready( function () {
 		var callback_def = $(this).attr("def");
 		if( callback && callback_def && !$(this).attr("prev-html") ){
 			$(this).prop('disabled', true);
+			$("body").addClass("loading-page");
 			//if( !$(this).attr("prev-html") )
 			//	$(this).attr("prev-html", $(this).html());
 
@@ -82,7 +83,7 @@ $(document).ready( function () {
 				if( parent.hasClass("need-texture") ){
 				}
 				parent.prop('disabled', false)
-
+				$("body").removeClass("loading-page");
 				//setTimeout(function() {
 				//	parent.prop('disabled', false);
 				//	parent.html( parent.attr("prev-html") );
@@ -107,6 +108,9 @@ $(document).ready( function () {
 					"showMethod": "slideDown",
 					"hideMethod": "slideUp"
 				}
+
+				if( data[0] == "js" )
+					return eval(data[1]);
 
 				toastr[data[0]]( data[1] );
 				all_sounds[data[0]].play();
