@@ -23,7 +23,7 @@ import base64
 import logger
 import traceback
 import project
-sys.stdout.reconfigure(encoding='utf-8')
+#sys.stdout.reconfigure(encoding='utf-8')
 
 webui_dir = "webui"
 if( hasattr(sys,"_MEIPASS") ):

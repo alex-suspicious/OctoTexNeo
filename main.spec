@@ -5,7 +5,7 @@ a = Analysis(
     ['main.py'],
     pathex=[],
     binaries=[],
-    datas=[('webui', 'webui/'), ('objects', 'objects/')],
+    datas=[('webui', 'webui/'), ('objects', 'objects/'), ('system', 'system/')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},

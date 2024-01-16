@@ -4,7 +4,7 @@ import sys
 
 gloabl_dir = ""
 if( hasattr(sys,"_MEIPASS") ):
-	gloabl_dir = sys._MEIPASS
+	gloabl_dir = sys._MEIPASS + "/"
 
 class project:
 	def load(self):
@@ -16,13 +16,17 @@ class project:
 		)
 		exists = False
 
+		print("START")
 		result = result[0]
+		result = result.replace("\\\\","/").replace("\\","/")
 		result = result.split("/")
 		result.pop()
 		sysProject.directory = "/".join(result)
 		print(sysProject.directory)
 
+
 		dirs = glob.glob(f"{sysProject.directory}/*")
+		print(dirs)
 
 		for x in range(len(dirs)):
 			if( "rtx-remix" in dirs[x] ):
@@ -31,7 +35,7 @@ class project:
 		if( not exists ):
 			return self.load()
 
-		f = open( f"{gloabl_dir}/system/projects","r+")
+		f = open( f"{gloabl_dir}system/projects","r+")
 		content = f.read()
 		if( sysProject.directory not in content ):
 			content = content.split("\n")
@@ -47,7 +51,7 @@ class project:
 	def get_list(self):
 		global sysProject, webview, glob
 
-		f = open( f"{gloabl_dir}/system/projects","r")
+		f = open( f"{gloabl_dir}system/projects","r")
 		content = f.read()
 		f.close()
 

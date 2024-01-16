@@ -63,7 +63,7 @@ def load():
     print("\nLoading Objects...")
     globalsz = globals()
     
-    print( "┌──────────────────────────────────")
+    #print( "┌──────────────────────────────────")
 
     savedSubdir = ""
     for x in range(0,len(files)):
@@ -80,7 +80,7 @@ def load():
         #    savedSubdir = subdir
             #print( f"┌────────  {subdir}")
 
-        print( "│ +        " + path )
+        print( "| +        " + path )
 
 
         try:
@@ -113,5 +113,5 @@ def load():
         #if( "Cron" in subdir_array ):
         #api(len(container.api)-1, filename, localz)
 
-    print("└──────────────────────────────────")
+    #print("└──────────────────────────────────")
 
