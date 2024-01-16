@@ -31,7 +31,9 @@
 			<div class="col-sm-2" style="border-right: 1px solid rgba(255, 255, 255, 0.3);" >
 				<h4 style="opacity: 0.9; margin: 15px;">Recent</h4>
 				<hr style="margin-left: 10px;">
-				<div class="scroll-output" style="margin: 10px !important; width: calc(100% - 10px) !important; height: calc(100% - 85px) !important;" >...</div>
+				<div class="scroll-output" style="margin: 10px !important; width: calc(100% - 10px) !important; padding: 0px; height: calc(100% - 85px) !important;" >
+					
+				</div>
 			</div>
 			<!--<div class="col" >
 				<div class="create-project-button disabled">
@@ -49,6 +51,18 @@
 			</div>
 		</div>
 	</div>
+		<script type="text/javascript">
+			$.get("/object/project/get_list",function(data){
+				data = JSON.parse(data);
+
+				for (var i = 0; i < data.length; i++) {
+					var name = data[i].split("/").slice(-1)[0];
+
+					if( data[i].length > 2 )
+						$(".scroll-output").append('<button class="btn recent-project-btn" obj="project" def="load_path" path="'+data[i]+'" >'+name+'</button>');
+				}
+			});	
+		</script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
   </body>

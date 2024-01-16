@@ -1,1 +1,79 @@
-Empty
+<div class="scroll-output" style="height: 27px; padding: 0px;" >
+	<button class="btn" id="go_back" style="height: 25px; width: 30px; line-height: 5px; padding-left: 9px; white-space: nowrap; margin: 0px; margin-right: -4px; margin-top: -4px;"><</button>
+	<input class="input blocklist-saving" id="main_dir" style="margin: 0px; width: calc(100% - 30px); border: 1px solid rgba(255, 255, 255, 0.2); white-space: nowrap;">
+</div>
+
+<div class="scroll-output" id="file_reader" style="height: calc( var(--bottom-size) - 27px - 70px ); margin-top: 15px !important; padding: 5px;" >
+	
+</div>
+
+
+<script type="text/javascript">
+	var current_directory_root = "";
+	var current_directory = "";
+
+	function updateContent() {
+		$.get("/object/io/get_files",{
+			directory: current_directory + "/*"
+		},function(data){
+			//current_directory = data;
+			$("#file_reader").html("");
+			data = JSON.parse(data);
+			console.log(data);
+			for (var i = 0; i < data.length; i++) {
+				var name = data[i].split("/").slice(-1)[0];
+				console.log(name);
+				var icon = "fa-solid fa-folder";
+				var classes = "file-represent open-folder";
+
+				if( name.includes(".") ){
+					icon = "fa-regular fa-file";
+					classes = "file-represent";
+				}
+
+				if( name.includes(".usd") ){
+					icon = "fa-regular fa-file-code";
+					classes = "file-represent";
+				}
+
+				if( name.includes(".dds") ){
+					icon = "fa-regular fa-file-code";
+					classes = "file-represent";
+
+					$("#file_reader").append('<div value="'+name+'" class="'+classes+' text-center" ><img loading="lazy" src="/object/dds/read?file='+data[i]+'"><p>' + name + '</p></div>');
+					continue;
+				}
+
+				if( name == "rtx-remix" ){
+					icon = "fa-solid fa-star";
+					classes += " rtx-star";
+				}
+
+
+				$("#file_reader").append('<div value="'+name+'" class="'+classes+' text-center" ><i class="'+icon+'"></i><p>' + name + '</p></div>');
+				//data[i]
+			}
+		});
+		if( current_directory == "" )
+			$("#main_dir").val("/");
+		else	
+			$("#main_dir").val(current_directory);
+	}
+
+	$("#go_back").click(function() {
+		current_directory = current_directory.split("/");
+		current_directory.pop();
+		current_directory = current_directory.join("/")
+		updateContent();
+	});
+
+	$(document).on("click",".open-folder",function() {
+		current_directory = current_directory + "/" + $(this).attr("value");
+		updateContent();
+	});
+
+	$.get("/object/project/get_dir",function(data){
+		current_directory_root = data;
+		updateContent();
+	})
+</script>

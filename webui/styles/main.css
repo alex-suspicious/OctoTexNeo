@@ -2,6 +2,8 @@
   --main-bg-color: rgb(20,20,20);
   --sidebars-color: rgb(30,30,30);
   --lighter: rgb(40,40,40);
+  --bottom-size: 340px;
+  --right-size: 325px;
 }
 
 *{
@@ -28,7 +30,7 @@ body{
 
 .right-sidebar{
 	background-color: var(--sidebars-color);
-	width: 320px;
+	width: var(--right-size);
 	height: calc(50vh - 26px);
 	right: 0;
 	top: 26px;
@@ -41,8 +43,8 @@ body{
 	top: 0;
 	left: 0;
 	padding: 15px;
-	width: calc(100vw - 320px);
-	height: calc(100vh - (220px + 26px));
+	width: calc(100vw - var(--right-size));
+	height: calc(100vh - (var(--bottom-size) + 26px));
 	position: absolute;
 	overflow-y: scroll;
 	box-shadow: inset 0px 10px 10px rgba(0, 0, 0, 0.1), inset 0px -10px 10px rgba(0, 0, 0, 0.1);
@@ -62,7 +64,7 @@ body{
 
 .right-sidebar-bottom{
 	background-color: var(--sidebars-color);
-	width: 320px;
+	width: var(--right-size);
 	height: calc(50vh);
 	right: 0;
 	bottom: 0;
@@ -82,8 +84,8 @@ body{
 
 .bottom-bar{
 	background-color: var(--sidebars-color);
-	width: calc(100vw - 320px);
-	height: 220px;
+	width: calc(100vw - var(--right-size));
+	height: var(--bottom-size);
 	bottom: 0;
 	position: absolute;
 	border-top: 1px solid rgba(255, 255, 255, 0.2);
@@ -159,7 +161,7 @@ body{
 .toast-bottom-right{
 	width: 50px !important;
 	overflow: visible !important;
-	transform: translateY(-210px) translateX(-311px);
+	transform: translateY(calc( (var(--bottom-size) * -1) + 10px ) ) translateX( calc( (var(--right-size) * -1) + 9px ) );
 	text-align: right !important;
 }
 
@@ -242,8 +244,8 @@ body{
 	background-color: transparent !important;
 	top: 26px;
 	left: 0;
-	width: calc(100vw - 320px);
-	height: calc(100vh - (220px + 26px));
+	width: calc(100vw - var(--right-size));
+	height: calc(100vh - (var(--bottom-size) + 26px));
 	position: absolute;
 }
 
@@ -345,6 +347,11 @@ body{
 	transition: 0.6s all !important;
 	pointer-events: none !important;
 	opacity: 0.75;
+	cursor: progress !important;
+}
+
+.loading-page{
+	cursor: progress !important;
 }
 
 @keyframes loading {
@@ -353,4 +360,77 @@ body{
   80%  {opacity: 1; width: 100%;}
   99%  {opacity: 0; width: 100%;}
   100% {opacity: 0; width: 0%;}
+}
+
+.file-represent{
+	width: 130px;
+	height: 90px;
+	margin: 0px;
+	display: inline-grid;
+	align-items: center;
+	justify-content: center;
+	overflow: visible;
+	line-height: 0px;
+	background-color: rgba(255, 255, 255, 0.0);
+	transition: all 0.1s;
+	cursor: default;
+	border: 1px solid rgba(255, 255, 255, 0.0);
+	box-shadow: 0px 0px 0px rgba(255, 255, 255, 0.0);
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.file-represent > i{
+	margin-top: 5px;
+	width: 100%;
+	text-align: center;
+	font-size: 50px;
+}
+
+.file-represent > p{
+	width: 100%;
+	text-align: center;
+	line-height: 13px;
+	font-size: 10px;
+	right: 0;
+}
+
+.file-represent > img{
+	width: 70px;
+	height: 70px;
+	margin: auto;
+}
+
+.file-represent:hover{
+	background-color: rgba(255, 255, 255, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.05);
+	transform: translateY(-2px);
+}
+
+.file-represent:active{
+	transition: all 0s;
+	background-color: rgba(255, 255, 255, 0.3);
+	border: 1px solid rgba(255, 255, 255, 0.5);
+	box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.3);
+	transform: translateY(1px);
+}
+
+
+.recent-project-btn{
+	width: 100%;
+	text-align: left;
+	font-size: 13px;
+	margin: 0px;
+	border: 1px solid rgba(255, 255, 255, 0);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.recent-project-btn:hover{
+	padding-left: 15px;
+}
+
+.recent-project-btn:active{
+	padding-left: 0px;
 }

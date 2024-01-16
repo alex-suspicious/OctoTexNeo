@@ -1,1 +1,1 @@
-wine start cmd /k pyinstaller --icon=favicon.ico --noconfirm --noconsole --add-data "webui;webui/" --add-data "objects;objects/" --onefile "main.py"
+wine start cmd /k pyinstaller --icon=favicon.ico --noconfirm --noconsole --add-data "webui;webui/" --add-data "objects;objects/" --add-data "system;system/" --onefile "main.py"

@@ -119,14 +119,17 @@ $(document).ready( function () {
 	});
 
 	setTimeout(function() {
-	$("input").map(function() {
-		var index = $( "input" ).index( this );
-		var value = localStorage.getItem('input-' + index);
-		//console.log(value);
+		$("input").map(function() {
+			var index = $( "input" ).index( this );
+			var value = localStorage.getItem('input-' + index);
+			//console.log(value);
 
-		if ( value !== null )
-			$(this).val(value);
-	});
+			if ( value !== null && !$(this).hasClass("blocklist-saving") )
+				$(this).val(value);
+		});
+
+
+
 	},1500);
 
 
@@ -141,3 +144,14 @@ $(document).ready( function () {
 	});
 
 });
+
+$.fn.isInViewport = function() {
+    var elementTop = $(this).offset().top;
+    var elementBottom = elementTop + $(this).outerHeight();
+
+    var viewportTop = $(window).scrollTop();
+    var viewportBottom = viewportTop + $(window).height();
+
+    return elementBottom > viewportTop && elementTop < viewportBottom;
+};
+
